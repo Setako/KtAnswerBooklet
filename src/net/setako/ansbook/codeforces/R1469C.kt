@@ -1,5 +1,6 @@
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.math.max
+import kotlin.math.min
 
 //region Utils Declaration
 private val output = System.out
@@ -28,5 +29,30 @@ private fun wl(arr: Array<*>, separator: String = " ") = wl(arr.joinToString(sep
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
 
+    repeat(t) {
+        val k = nLineInts()[1]
+        val hArr = nLineLongs()
+
+
+        var positionLimitMax = hArr[0] + (k - 1)
+        var positionLimitMin = hArr[0] - (k - 1)
+
+        wl(run {
+            hArr.drop(1).forEach { h ->
+                val positionMax = h + (k - 1)
+                val positionMin = h
+
+                wl("$h , limit $positionLimitMax $positionLimitMin")
+
+                if (positionMin > positionLimitMax || positionMax < positionLimitMin) return@run "No";
+
+                positionLimitMax = min(positionLimitMax, positionMax) + (k - 1)
+                positionLimitMin = max(positionLimitMin, positionMin) - (k - 1)
+            }
+
+            return@run "Yes"
+        })
+    }
 }

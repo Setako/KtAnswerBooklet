@@ -1,5 +1,6 @@
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.math.abs
+import kotlin.math.max
 
 //region Utils Declaration
 private val output = System.out
@@ -28,5 +29,28 @@ private fun wl(arr: Array<*>, separator: String = " ") = wl(arr.joinToString(sep
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
 
+    repeat(t) {
+        nLine()
+        val r = nLineInts()
+        nLine()
+        val b = nLineInts()
+
+        var maxR = 0
+        var currentR = 0
+        r.forEach {
+            currentR += it
+            maxR = max(maxR, currentR)
+        }
+
+        var maxB = 0
+        var currentB = 0
+        b.forEach {
+            currentB += it
+            maxB = max(maxB, currentB)
+        }
+
+        wl(maxB + maxR)
+    }
 }

@@ -1,5 +1,5 @@
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.math.abs
 
 //region Utils Declaration
 private val output = System.out
@@ -28,5 +28,36 @@ private fun wl(arr: Array<*>, separator: String = " ") = wl(arr.joinToString(sep
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
 
+    repeat(t) {
+
+        val l = nLine()
+
+        fun test(line: String, reversed: Boolean): Boolean {
+            var a = 0
+            var b = 0
+            line.toCharArray().forEach {
+                if(reversed){
+                    when (it) {
+                        ')' -> a += 1
+                        '?' -> b++
+                        '(' -> a -= 1
+                    }
+                }else{
+                    when (it) {
+                        '(' -> a += 1
+                        '?' -> b++
+                        ')' -> a -= 1
+                    }
+                }
+                if (b < -a) return false
+            }
+
+            return !(abs(a) > b || (a + b) % 2 != 0)
+        }
+
+        if (test(l, false) && test(l.reversed(), true)) wl("Yes") else wl("No")
+
+    }
 }
