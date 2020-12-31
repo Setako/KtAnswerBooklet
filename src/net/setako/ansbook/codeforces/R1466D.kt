@@ -1,5 +1,6 @@
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
 
 //region Utils Declaration
 private val output = System.out
@@ -28,5 +29,37 @@ private fun wl(arr: Iterable<*>, separator: String = " ") = wl(arr.joinToString(
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
 
+    repeat(t) {
+        nLine()
+        val vertiesWeights = nLineLongs()
+
+        val nonZeroDegreeVerties = HashSet<Int>()
+        val extraWeights = ArrayList<Long>();
+
+        repeat(vertiesWeights.size - 1) {
+            repeat(2) {
+                nInt().let { vertex ->
+                    if (nonZeroDegreeVerties.contains(vertex - 1)) {
+                        extraWeights.add(vertiesWeights[vertex - 1])
+                    } else {
+                        nonZeroDegreeVerties.add(vertex - 1)
+                    }
+                }
+            }
+        }
+
+        val answer = ArrayList<Long>()
+        answer.add(vertiesWeights.sum())
+
+        extraWeights.sort()
+        extraWeights.reverse()
+        repeat(vertiesWeights.size - 2) {
+            answer.add(answer.last() + extraWeights[it])
+        }
+
+        wl(answer)
+        nLine()
+    }
 }

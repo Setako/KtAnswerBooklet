@@ -1,5 +1,5 @@
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 
 //region Utils Declaration
 private val output = System.out
@@ -28,5 +28,24 @@ private fun wl(arr: Iterable<*>, separator: String = " ") = wl(arr.joinToString(
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
 
+    repeat(t) {
+        wl(run {
+            val t = nLineInts()[0];
+            val xArr = nLineInts()
+
+            val exist = HashSet<Int>()
+            xArr.forEach {
+                if (exist.contains(it)) {
+                    exist.add(it + 1)
+                } else {
+                    exist.add(it)
+                }
+            }
+
+            return@run exist.size
+
+        })
+    }
 }

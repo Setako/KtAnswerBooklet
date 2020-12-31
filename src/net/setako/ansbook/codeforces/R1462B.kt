@@ -1,5 +1,4 @@
 import java.util.*
-import kotlin.collections.HashMap
 
 //region Utils Declaration
 private val output = System.out
@@ -28,5 +27,20 @@ private fun wl(arr: Iterable<*>, separator: String = " ") = wl(arr.joinToString(
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
 
+    repeat(t) {
+        wl(run {
+            nLine()
+            val s = nLine()
+
+            when {
+                s.startsWith("2020") || s.endsWith("2020") -> return@run "YES"
+                s.startsWith("202") && s.endsWith("0") -> return@run "YES"
+                s.startsWith("20") && s.endsWith("20") -> return@run "YES"
+                s.startsWith("2") && s.endsWith("020") -> return@run "YES"
+            }
+            return@run "NO"
+        })
+    }
 }

@@ -1,5 +1,4 @@
 import java.util.*
-import kotlin.collections.HashMap
 
 //region Utils Declaration
 private val output = System.out
@@ -28,5 +27,11 @@ private fun wl(arr: Iterable<*>, separator: String = " ") = wl(arr.joinToString(
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
 
+    repeat(t) {
+        nLine()
+        val aArr = nLineInts()
+        wl((0..aArr.lastIndex).map { i-> if (i % 2 == 0) aArr[i/2] else aArr[aArr.lastIndex - ((i-1)/2)] })
+    }
 }
