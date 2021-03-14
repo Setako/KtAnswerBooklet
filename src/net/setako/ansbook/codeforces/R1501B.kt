@@ -1,5 +1,5 @@
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.math.max
 
 //region Utils Declaration
 private val output = System.out
@@ -29,5 +29,20 @@ private fun wl(vararg arr: Any, separator: String = " ") = wl(arr.joinToString(s
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
+    repeat(t) {
+        val n = nLineInts()[0]
+        val aArr = nLineInts()
 
+        var remainCream = 0
+        aArr.asReversed().map { addCream ->
+            remainCream = max(remainCream, addCream)
+            if (remainCream > 0) {
+                remainCream--
+                1
+            } else {
+                0
+            }
+        }.asReversed().let { wl(it) }
+    }
 }

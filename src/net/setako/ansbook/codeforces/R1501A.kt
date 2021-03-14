@@ -1,5 +1,5 @@
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.math.ceil
 
 //region Utils Declaration
 private val output = System.out
@@ -29,5 +29,23 @@ private fun wl(vararg arr: Any, separator: String = " ") = wl(arr.joinToString(s
 //endregion
 
 fun main() {
+    val t = nLineInts()[0]
 
+    repeat(t) {
+        val n = nInt()
+        val abArr = (1..n).map { nInt() to nInt() }
+        val distArr = (listOf(0 to 0) + abArr).dropLast(1).zip(abArr)
+            .map { (prev, next) -> next.first - prev.second }
+        val tmArr = (1..n).map { nInt() }
+
+        var now = 0
+        tmArr.forEachIndexed { index, delay ->
+            now += delay + distArr[index]
+            if (index != n - 1) {
+                now = (now + ceil(abArr[index].let { (a, b) -> (b - a).toFloat() / 2 }).toInt())
+                    .coerceAtLeast(abArr[index].second)
+            }
+        }
+        wl(now)
+    }
 }
